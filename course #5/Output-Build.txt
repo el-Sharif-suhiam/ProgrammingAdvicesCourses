@@ -1,0 +1,6 @@
+﻿Build started at 7:31 PM...
+1>------ Build started: Project: MathGame project, Configuration: Debug x64 ------
+1>MathGame project.cpp
+1>MathGame project.vcxproj -> C:\Users\Alsharif\Documents\Programming\course #5\MathGame project\x64\Debug\MathGame project.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+========== Build completed at 7:31 PM and took 00.975 seconds ==========

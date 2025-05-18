@@ -1,0 +1,7 @@
+Enter Account Number: A150
+Enter Pin Code: 1234
+Enter Name: Mohammed Abu-Hadhoud
+Enter Phone Number: 079999
+Enter Account Balance: 5270
+15454314 // 4823 // Omar // 2555-555-555 // 5000.000000 // 
+16541646 // 4566 // Ali // 666-666-666-6666 // 8000.000000 // 
