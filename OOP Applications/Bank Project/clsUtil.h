@@ -195,7 +195,7 @@ public:
 		"eighty",
 		"ninety"
 			};
-			return arr[num / 10] + " " + NumToText(num % 10);
+			return arr[num / 10] + " " + NumberToText(num % 10);
 		}
 		else if (100 <= num && num <= 999) {
 			string arr[] = {
@@ -210,7 +210,7 @@ public:
 		"eight hundred",
 		"nine hundred"
 			};
-			return  arr[num / 100] + " " + NumToText(num % 100);
+			return  arr[num / 100] + " " + NumberToText(num % 100);
 		}
 		else if (1000 <= num && num <= 9999) {
 			string arr[] = {
@@ -227,13 +227,13 @@ public:
 		"ten thousand"
 			};
 
-			return arr[num / 1000] + " " + NumToText(num % 1000);
+			return arr[num / 1000] + " " + NumberToText(num % 1000);
 		}
 		else if (10000 <= num && num <= 999999) {
-			return NumToText(num / 1000) + "thousand, " + NumToText(num % 1000);
+			return NumberToText(num / 1000) + "thousand, " + NumberToText(num % 1000);
 		}
 		else if (1000000 <= num && num <= 999999999) {
-			return NumToText(num / 1000000) + "million, " + NumToText(num % 1000000);
+			return NumberToText(num / 1000000) + "million, " + NumberToText(num % 1000000);
 		}
 	}
 

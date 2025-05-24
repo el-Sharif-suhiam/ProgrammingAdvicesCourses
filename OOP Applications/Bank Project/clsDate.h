@@ -226,6 +226,14 @@ public:
 		this->day = now->tm_mday;
 	}
 
+	static string GetSystemDateTimeString() {
+		time_t now = time(0);
+		tm* Time = localtime(&now);
+
+		return (DateToString(clsDate()) + " - " + to_string(Time->tm_hour)
+			+ ":" + to_string(Time->tm_min) + ":"
+			+ to_string(Time->tm_min));
+	}
 	void StringToDate(string strDate) {
 		vector<string> vcStrDate = clsString::Split(strDate, "/");
 		day = stoi(vcStrDate[0]);

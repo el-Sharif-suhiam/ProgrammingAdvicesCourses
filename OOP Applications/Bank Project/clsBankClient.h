@@ -12,7 +12,8 @@ class clsBankClient : public clsPerson
 	enMode _Mode;
 	string _AccountNumber;
 	string _PinCode;
-	float	   _AccountBalance;
+	float  _AccountBalance;
+	bool   _MarkToDelete = false;
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Seperator = "#//#") {
 		vector<string> vcClient = clsString::Split(Line, Seperator);
@@ -38,7 +39,7 @@ class clsBankClient : public clsPerson
 	};
 
 
-	vector<clsBankClient> _LoadClientsDataFromFile() {
+	static vector<clsBankClient> _LoadClientsDataFromFile() {
 		vector<clsBankClient> Clients;
 		fstream File;
 		File.open("Clients.txt", ios::in);
@@ -59,8 +60,10 @@ class clsBankClient : public clsPerson
 		File.open("Clients.txt", ios::out);
 
 		if (File.is_open()) {
-			for (clsBankClient &C : vcClients) {
-				File << _ConvertClientObjectToLine(C) << endl;
+			for (clsBankClient C : vcClients) {
+				if (C._MarkToDelete == false) {
+					File << _ConvertClientObjectToLine(C) << endl;
+				};
 			}
 			File.close();
 
@@ -131,20 +134,20 @@ public:
 
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-	void Print() {
-		cout << "\nClient Card : \n\n";
-		cout << "--------------------------------------------\n\n";
-		cout << "First Name      : " << FirstName << '\n';
-		cout << "Last Name       : " << LastName << '\n';
-		cout << "Full Name       : " << FullName() << '\n';
-		cout << "Email           : " << Email << '\n';
-		cout << "Phone Number    : " << Phone << '\n';
-		cout << "Account Number  : " << _AccountNumber << '\n';
-		cout << "Password        : " << _PinCode << '\n';
-		cout << "Account Balance : " << _AccountBalance << '\n';
-		cout << "--------------------------------------------\n\n";
+	//void Print() {
+	//	cout << "\nClient Card : \n\n";
+	//	cout << "--------------------------------------------\n\n";
+	//	cout << "First Name      : " << FirstName << '\n';
+	//	cout << "Last Name       : " << LastName << '\n';
+	//	cout << "Full Name       : " << FullName() << '\n';
+	//	cout << "Email           : " << Email << '\n';
+	//	cout << "Phone Number    : " << Phone << '\n';
+	//	cout << "Account Number  : " << _AccountNumber << '\n';
+	//	cout << "Password        : " << _PinCode << '\n';
+	//	cout << "Account Balance : " << _AccountBalance << '\n';
+	//	cout << "--------------------------------------------\n\n";
 
-	};
+	//};
 
 	static clsBankClient Find(string AccNum) {
 
@@ -218,4 +221,49 @@ public:
 		return clsBankClient(enMode::AddNewMode, "", "", "", "", AccNum, "", 0);
 	};
 
+	bool Delete() {
+		vector<clsBankClient> vcClients;
+		vcClients = _LoadClientsDataFromFile();
+		for (clsBankClient& C : vcClients) {
+			if (C.AccountNumber() == _AccountNumber) {
+				C._MarkToDelete = true;
+			}
+		};
+
+		_SaveClientsDateToFile(vcClients);
+		*this = _GetEmptyClientObject();
+		return true;
+
+	};
+
+	static vector<clsBankClient> GetClientsList() {
+		return _LoadClientsDataFromFile();
+	};
+
+	static double GetTotalBalances() {
+		vector<clsBankClient> Clients = _LoadClientsDataFromFile();
+		double Total = 0;
+		for (clsBankClient C : Clients) {
+			Total += C.AccountBalance;
+		};
+		return Total;
+	};
+	bool Deposit(double amount) {
+		_AccountBalance += amount;
+		Save();
+		return true;
+	};
+
+	bool Withdraw(double amount) {
+		if (amount > AccountBalance) {
+			cout << "Error, the Incorrect Amount \n";
+			return false;
+		}
+		else {
+			_AccountBalance -= amount;
+			Save();
+			return true;
+		}
+		
+	}
 };
