@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include "clsScreen.h"
-#include "clsBankUser.h"
-
+#include "..\Models\clsBankClient.h"
 using namespace std;
 class clsAddUserScreen : protected clsScreen
 {

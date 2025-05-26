@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "clsScreen.h"
-#include "clsBankUser.h"
+#include "..\Models\clsBankUser.h"
 
 using namespace std;
 

@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-#include "clsInputValidate.h"
-#include "clsDate.h"
-#include "clsBankClient.h"
-#include "clsBankUser.h"
-#include "Global.h"
+#include "..\Utils\clsInputValidate.h"
+#include "..\Utils\clsDate.h"
+#include "..\Models\clsBankClient.h"
+#include "..\Models\clsBankUser.h"
+#include "..\Global\Global.h"
 using namespace std;
 
 class clsScreen
@@ -77,6 +77,12 @@ class clsScreen
 			Permissions += clsBankUser::enUserPermissions::pManageUsers;
 		}
 
+		cout << "\nLogin History List? y/n? ";
+		cin >> Answer;
+		if (Answer == 'y' || Answer == 'Y')
+		{
+			Permissions += clsBankUser::enUserPermissions::pLoginRegister;
+		}
 
 		return Permissions;
 

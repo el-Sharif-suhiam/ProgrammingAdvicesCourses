@@ -1,3 +1,3 @@
-#include "clsBankUser.h"
+#include "../Models/clsBankUser.h"
 
 clsBankUser CurrentUser = clsBankUser::Find("", "");

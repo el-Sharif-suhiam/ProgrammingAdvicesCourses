@@ -10,3 +10,4 @@
 
 class clsBankUser; // Forward declaration
 extern clsBankUser CurrentUser;
+const short EncryptKey = 8;

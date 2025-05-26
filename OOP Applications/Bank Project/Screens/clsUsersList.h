@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsBankUser.h"
+#include "..\Models\clsBankUser.h"
 using namespace std;
 
 class clsUsersList : protected clsScreen

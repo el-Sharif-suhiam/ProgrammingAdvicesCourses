@@ -3,7 +3,7 @@
 #include <vector>
 #include "string"
 #include "clsPerson.h"
-#include "clsString.h"
+#include "..\Utils\clsString.h"
 #include <fstream>
 using namespace std;
 class clsBankClient : public clsPerson

@@ -2,9 +2,9 @@
 #include <iostream>
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsBankClient.h"
-#include "clsInputValidate.h"
-#include "clsUtil.h"
+#include "..\Models\clsBankClient.h"
+#include "..\Utils\clsInputValidate.h"
+#include "..\Utils\clsUtil.h"
 class clsTotalBalancesScreen : protected clsScreen
 {
 	static void _PrintClientRecordBalanceLine(clsBankClient Client)

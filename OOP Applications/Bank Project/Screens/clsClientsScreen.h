@@ -2,8 +2,8 @@
 #include <iostream>
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsBankClient.h"
-#include "clsBankUser.h"
+#include "..\Models\clsBankClient.h"
+#include "..\Models\clsBankUser.h"
 
 class clsClientsScreen : protected clsScreen
 {

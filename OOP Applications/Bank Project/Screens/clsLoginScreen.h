@@ -1,9 +1,10 @@
 #pragma once
 #include<iostream>
-#include "clsBankUser.h"
+#include "..\Models\clsBankUser.h"
 #include "clsScreen.h"
-#include "Global.h"
+#include "..\Global\Global.h"
 #include "clsMainScreen.h"
+#include "..\Utils\clsUtil.h"
 
 class clsLoginScreen : protected clsScreen
 {
@@ -13,7 +14,6 @@ class clsLoginScreen : protected clsScreen
 		bool LoginFaild = false;
 		string username = "", password = "";
 		short LoginFaildCounts = 0;
-
 		do {
 			if (LoginFaild) {
 				LoginFaildCounts++;
@@ -30,7 +30,10 @@ class clsLoginScreen : protected clsScreen
 			cin >> username;
 			cout << "\nEnter the password : \n";
 			cin >> password;
-			CurrentUser = clsBankUser::Find(username, password);
+			//string DecryptedPassword = clsUtil::DecryptText(password, EncryptKey);
+			//CurrentUser = clsBankUser::Find(username, DecryptedPassword);
+			CurrentUser = clsBankUser::Find(username,password);
+
 			LoginFaild = CurrentUser.IsEmpty();
 		} while (LoginFaild);
 			CurrentUser.SaveLoginDateToFile();

@@ -2,8 +2,8 @@
 #include <iostream>
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsBankClient.h"
-#include "clsInputValidate.h"
+#include "..\Models\clsBankClient.h"
+#include "..\\Utils\clsInputValidate.h"
 #include "clsUsersList.h"
 #include "clsAddUserScreen.h"
 #include "clsDeleteUserScreen.h"

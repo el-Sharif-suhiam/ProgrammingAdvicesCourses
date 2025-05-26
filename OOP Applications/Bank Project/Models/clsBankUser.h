@@ -3,9 +3,10 @@
 #include <vector>
 #include "string"
 #include "clsPerson.h"
-#include "clsString.h"
-#include "Global.h"
-#include "clsDate.h"
+#include "..\Utils\clsString.h"
+#include "..\Global\Global.h"
+#include "..\Utils\clsDate.h"
+#include "..\Utils\clsUtil.h"
 #include <fstream>
 
 using namespace std;
@@ -17,11 +18,12 @@ class clsBankUser : public clsPerson
 	string _Password;
 	int  _Permissions;
 	bool   _MarkToDelete = false;
+	
 
 	static clsBankUser _ConvertLineToUserObject(string Line, string Seperator = "#//#") {
 		vector<string> vcUser = clsString::Split(Line, Seperator);
 		return clsBankUser(enMode::UpdateMode, vcUser[0], vcUser[1], vcUser[2], vcUser[3], vcUser[4],
-			vcUser[5], stod(vcUser[6]));
+			clsUtil::DecryptText(vcUser[5],EncryptKey), stod(vcUser[6]));
 	};
 
 	string _ConvertUserObjectToLine(clsBankUser User, string Seperator = "#//#") {
@@ -31,7 +33,7 @@ class clsBankUser : public clsPerson
 		record += User.Email + Seperator;
 		record += User.Phone + Seperator;
 		record += User.Username + Seperator;
-		record += User.Password + Seperator;
+		record += clsUtil::EncryptText(User.Password, EncryptKey) + Seperator;
 		record += to_string(User.Permissions);
 
 		return record;
@@ -102,13 +104,13 @@ class clsBankUser : public clsPerson
 		string record = "";
 		record += clsDate::GetSystemDateTimeString() + Seperator;
 		record += CurrentUser.Username + Seperator;
-		record += CurrentUser.Password + Seperator;
+		record += clsUtil::EncryptText(CurrentUser.Password, EncryptKey) + Seperator;
 		record += to_string(CurrentUser.Permissions);
 
 		return record;
 	};
 
-
+	
 public:
 	clsBankUser(enMode mode, string FirstName, string LastName, string Email, string Phone,
 		string Username, string Password, int Permission) :
@@ -121,7 +123,8 @@ public:
 	
 	enum enUserPermissions {
 		eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
-		pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64
+		pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64,
+		pLoginRegister = 128
 	};
 
 	void SetUsername(string username) {
@@ -273,4 +276,5 @@ public:
 
 		};
 	};
+	
 };
