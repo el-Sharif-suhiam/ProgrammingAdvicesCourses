@@ -11,7 +11,7 @@
 using namespace std;
 class clsTransactionsScreen : protected clsScreen
 {
-	enum _enTransactionsMenueOptions { eDeposit = 1, eWithdraw = 2, eShowTotalBalance = 3,eTransfer= 4,eTransferLog =5, eShowMainMenue = 6 };
+	enum _enTransactionsMenuOptions { eDeposit = 1, eWithdraw = 2, eShowTotalBalance = 3,eTransfer= 4,eTransferLog =5, eShowMainMenue = 6 };
     static short _ReadTransactionsMenuOption() {
         cout << setw(37) << left << "" << "Choose what you want to do ? [1 to 6]\n";
         short Choice = clsInputValidate::ReadShortNumberBetween(1, 6);
@@ -38,7 +38,7 @@ class clsTransactionsScreen : protected clsScreen
     static void _ShowTransferLogs() {
         clsTransferLogsScreen::ShowTransferLogsScreen();
     };
-    static void _PerfromTransactionsMenuOption(_enTransactionsMenueOptions MenuOption) {
+    static void _PerfromTransactionsMenuOption(_enTransactionsMenuOptions MenuOption) {
         switch (MenuOption)
         {
         case clsTransactionsScreen::eDeposit:
@@ -85,16 +85,16 @@ public:
         system("cls");
         _DrawScreenHeader("\tTransactions Menu");
         cout << setw(37) << left << ""<< "===========================================\n";
-        cout << setw(37) << left << ""<< "\t\tTransactions Menue Screen\n";
+        cout << setw(37) << left << ""<< "\t\tTransactions Menu Screen\n";
         cout << setw(37) << left << ""<< "===========================================\n";
         cout << setw(37) << left << ""<< "\t[1] Deposit.\n";
         cout << setw(37) << left << ""<< "\t[2] Withdraw.\n";
         cout << setw(37) << left << ""<< "\t[3] Total Balances.\n";
         cout << setw(37) << left << "" << "\t[4] Transfer.\n";
         cout << setw(37) << left << "" << "\t[5] Transfer Logs List.\n";
-        cout << setw(37) << left << ""<< "\t[6] Main Menue.\n";
+        cout << setw(37) << left << ""<< "\t[6] Main Menu.\n";
         cout << setw(37) << left << ""<< "===========================================\n";
-        _PerfromTransactionsMenuOption((_enTransactionsMenueOptions)_ReadTransactionsMenuOption());
+        _PerfromTransactionsMenuOption((_enTransactionsMenuOptions)_ReadTransactionsMenuOption());
     }
 
 };

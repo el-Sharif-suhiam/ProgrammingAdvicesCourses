@@ -13,17 +13,18 @@
 #include "clsManageUsersScreen.h"
 #include "clsLoginScreen.h"
 #include "clsLoginHistoryScreen.h"
+#include "clsCurrencyExchangeScreen.h"
 class clsMainScreen : protected clsScreen
 {
 
     enum _enMainMenuOptions {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenu = 6,
-        eManageUsers = 7, eLoginRegister = 8 ,eExit = 9
+        eManageUsers = 7, eLoginRegister = 8, eCurrencyExchange = 9 ,eExit = 10
     };
     static short _ReadMainMenuOption() {
-        cout << setw(37) << left << "" << "Choose what you want to do ? [1 to 9]\n";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 9);
+        cout << setw(37) << left << "" << "Choose what you want to do ? [1 to 10]\n";
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 10);
         return Choice;
     };
     static void _GoBackToMainMenu()
@@ -59,6 +60,9 @@ class clsMainScreen : protected clsScreen
     static void _LoginHistoryScreen() {
         clsLoginHistoryScreen::ShowLoginHistoryScreen();
     }
+    static void _CurrenciesExchange() {
+        clsCurrencyExchangeScreen::ShowCurrencyExchangeMenu();
+    };
     /*static void _ShowEndScreen() {
         cout << setw(37) << left << "" << "\n\t-----------------------------------\n";
         cout << setw(37) << left << "" << "\tProgram Ends :-)";
@@ -112,6 +116,11 @@ class clsMainScreen : protected clsScreen
             _LoginHistoryScreen();
             _GoBackToMainMenu();
             break;
+        case clsMainScreen::eCurrencyExchange:
+            system("cls");
+            _CurrenciesExchange();
+            _GoBackToMainMenu();
+            break;
         case clsMainScreen::eExit:
             system("cls");
             _LogOut();
@@ -138,7 +147,8 @@ public:
         cout << setw(37) << left << "" << "\t[6] Transactions.\n";
         cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
         cout << setw(37) << left << "" << "\t[8] Login History List.\n";
-        cout << setw(37) << left << "" << "\t[9] Logout.\n";
+        cout << setw(37) << left << "" << "\t[9] Currency Exchange.\n";
+        cout << setw(37) << left << "" << "\t[10] Logout.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 
         _PerfromMainMenuOption((_enMainMenuOptions)_ReadMainMenuOption());
